@@ -1,17 +1,27 @@
 package com.quaiantique.quaiantique.Controller;
 
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.RequestMethod;
+import com.quaiantique.quaiantique.Service.UserManager;
+import com.quaiantique.quaiantique.Entities.User;;
 
 
 @RestController
-@RequestMapping(value = "/user")
 public class UserController {
     
+    @Autowired
+    UserManager manager;
 
-    @RequestMapping(method=RequestMethod.GET)
-    public String getUser() {
-        return "coucou";
+    @PostMapping("/login")
+    public User login(@RequestBody UserInfo userInfo) {
+        return manager.login(userInfo);
+    }
+
+    @PostMapping("/signup")
+    public void signUp(@RequestBody UserInfo userInfo) {
+       manager.createUser(userInfo);
     }
 }

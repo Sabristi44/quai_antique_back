@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
@@ -29,9 +28,15 @@ public class User {
     @OneToMany
     private List<Allergy> allergies = new ArrayList<>();
     @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "user_id")
     private List<Reservation> reservations = new ArrayList<>();
     private boolean isAdmin;
     private int numPerson;
+
+    public User(String mail, String password) {
+        this.mail = mail;
+        this.password = password;
+        this.isAdmin = false;
+        this.numPerson = 1;
+      }
 
 }
