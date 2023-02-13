@@ -1,14 +1,8 @@
 package com.quaiantique.quaiantique.Entities;
 
-
-
-import java.util.ArrayList;
-import java.util.List;
 import java.time.LocalDateTime;
-
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -28,8 +22,7 @@ public class Reservation {
 
     private int numPerson;
     private LocalDateTime reservationDate;
-    @OneToMany(cascade = CascadeType.ALL)
-    private List<Allergy> allergies = new ArrayList<>();
+    private String allergies;
     @ManyToOne(cascade = CascadeType.MERGE)
     private User user;
     private int maxNumPerson;

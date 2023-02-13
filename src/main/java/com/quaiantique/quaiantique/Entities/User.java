@@ -2,7 +2,6 @@ package com.quaiantique.quaiantique.Entities;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.CascadeType;
@@ -25,8 +24,7 @@ public class User {
 
     private String mail;
     private String password;
-    @OneToMany
-    private List<Allergy> allergies = new ArrayList<>();
+    private String allergies;
     @OneToMany(cascade = CascadeType.ALL)
     private List<Reservation> reservations = new ArrayList<>();
     private boolean isAdmin;

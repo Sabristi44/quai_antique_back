@@ -24,4 +24,9 @@ public class UserController {
     public void signUp(@RequestBody UserInfo userInfo) {
        manager.createUser(userInfo);
     }
+
+    @PostMapping("/allergy")
+    public void allergy(@RequestBody AllergyInfo allergyInfo) {
+        manager.updateUserAllergies(allergyInfo);
+    }
 }
