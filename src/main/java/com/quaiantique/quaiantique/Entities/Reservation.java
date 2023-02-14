@@ -25,5 +25,11 @@ public class Reservation {
     private String allergies;
     @ManyToOne(cascade = CascadeType.MERGE)
     private User user;
-    private int maxNumPerson;
-}
+
+    public Reservation(int numPerson, LocalDateTime reservationDate, String allergies, User user) {
+        this.numPerson = numPerson;
+        this.reservationDate = reservationDate;
+        this.allergies = allergies;
+        this.user = user;
+      }
+    }
