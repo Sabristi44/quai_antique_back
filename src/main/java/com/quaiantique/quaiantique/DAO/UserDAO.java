@@ -7,6 +7,6 @@ import org.springframework.data.jpa.repository.Query;
 
 public interface UserDAO extends CrudRepository<User, Long> {
     
-    @Query("SELECT u FROM User u WHERE u.mail = :mail AND u.password = :password")
-    User login(@Param("mail") String mail,@Param("password") String password);
+    @Query("SELECT u FROM User u WHERE u.mail = :mail")
+    User login(@Param("mail") String mail);
 }

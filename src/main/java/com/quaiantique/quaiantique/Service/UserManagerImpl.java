@@ -1,8 +1,9 @@
 package com.quaiantique.quaiantique.Service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-
 import com.quaiantique.quaiantique.Entities.User;
 import com.quaiantique.quaiantique.DAO.UserDAO;
 import com.quaiantique.quaiantique.Controller.UserInfo;
@@ -14,15 +15,28 @@ public class UserManagerImpl implements UserManager {
     @Autowired
     private UserDAO userDAO;
 
+    private PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+
     @Override
     public User login(UserInfo userInfo) {
-        return userDAO.login(userInfo.mail,userInfo.password);
+        User user = userDAO.login(userInfo.mail);
+        String encodePassword = this.passwordEncoder.encode(user.getPassword());
+        boolean isPasswordEqual =  passwordEncoder.matches(userInfo.password, encodePassword);
+        if(isPasswordEqual) {
+            return user;
+        } else {
+            return user;
+        }
     }
 
     @Override
     public void createUser(UserInfo userInfo) {
-        final User user = new User(userInfo.mail,userInfo.password);
-        userDAO.save(user);
+        User user = userDAO.login(userInfo.mail); 
+        if(user == null) {
+        String encodePassword = this.passwordEncoder.encode(userInfo.password);
+        User userCreate = new User(userInfo.mail,encodePassword);
+        userDAO.save(userCreate);
+        }
     }
 
     @Override
