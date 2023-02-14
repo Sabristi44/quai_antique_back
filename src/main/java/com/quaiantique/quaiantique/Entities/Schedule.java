@@ -1,5 +1,7 @@
 package com.quaiantique.quaiantique.Entities;
 
+import java.time.LocalTime;
+
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import jakarta.persistence.Entity;
@@ -23,31 +25,31 @@ public class Schedule {
     private long id;
 
     @JsonFormat(pattern = "HH:mm")
-    private String openingMonday;
+    private LocalTime openingMonday;
     @JsonFormat(pattern = "HH:mm")
-    private String closingMonday;
+    private LocalTime closingMonday;
     @JsonFormat(pattern = "HH:mm")
-    private String openingTuesday;
+    private LocalTime openingTuesday;
     @JsonFormat(pattern = "HH:mm")
-    private String closingTuesday;
+    private LocalTime closingTuesday;
     @JsonFormat(pattern = "HH:mm")
-    private String openingWednesday;
+    private LocalTime openingWednesday;
     @JsonFormat(pattern = "HH:mm")
-    private String closingWednesday;
+    private LocalTime closingWednesday;
     @JsonFormat(pattern = "HH:mm")
-    private String openingThursday;
+    private LocalTime openingThursday;
     @JsonFormat(pattern = "HH:mm")
-    private String closingThursday;
+    private LocalTime closingThursday;
     @JsonFormat(pattern = "HH:mm")
-    private String openingFriday;
+    private LocalTime openingFriday;
     @JsonFormat(pattern = "HH:mm")
-    private String closingFriday;
+    private LocalTime closingFriday;
     @JsonFormat(pattern = "HH:mm")
-    private String openingSaturday;
+    private LocalTime openingSaturday;
     @JsonFormat(pattern = "HH:mm")
-    private String closingSaturday;
+    private LocalTime closingSaturday;
     @JsonFormat(pattern = "HH:mm")
-    private String openingSunday;
+    private LocalTime openingSunday;
     @JsonFormat(pattern = "HH:mm")
-    private String closingSunday;
+    private LocalTime closingSunday;
 }

@@ -2,6 +2,7 @@ package com.quaiantique.quaiantique.Service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import java.time.LocalTime;
 
 import com.quaiantique.quaiantique.Entities.Schedule;
 import com.quaiantique.quaiantique.DAO.ScheduleDAO;
@@ -17,20 +18,20 @@ public class ScheduleManagerImpl implements ScheduleManager {
     public void updateSchedule(ScheduleInfo scheduleInfo) {
         final Schedule schedule = new Schedule(
         1L,
-        scheduleInfo.openingMonday,
-        scheduleInfo.closingMonday,
-        scheduleInfo.openingTuesday, 
-        scheduleInfo.closingTuesday,
-        scheduleInfo.openingWednesday,
-        scheduleInfo.closingWednesday,
-        scheduleInfo.openingThursday,
-        scheduleInfo.closingThursday,
-        scheduleInfo.openingFriday,
-        scheduleInfo.closingFriday,
-        scheduleInfo.openingSaturday,
-        scheduleInfo.closingSaturday,
-        scheduleInfo.openingSunday,
-         scheduleInfo.closingSunday
+        LocalTime.parse(scheduleInfo.openingMonday),
+        LocalTime.parse(scheduleInfo.closingMonday),
+        LocalTime.parse(scheduleInfo.openingTuesday), 
+        LocalTime.parse(scheduleInfo.closingTuesday),
+        LocalTime.parse(scheduleInfo.openingWednesday),
+        LocalTime.parse(scheduleInfo.closingWednesday),
+        LocalTime.parse(scheduleInfo.openingThursday),
+        LocalTime.parse(scheduleInfo.closingThursday),
+        LocalTime.parse(scheduleInfo.openingFriday),
+        LocalTime.parse(scheduleInfo.closingFriday),
+        LocalTime.parse(scheduleInfo.openingSaturday),
+        LocalTime.parse(scheduleInfo.closingSaturday),
+        LocalTime.parse(scheduleInfo.openingSunday),
+        LocalTime.parse(scheduleInfo.closingSunday)
         );
         scheduleDAO.save(schedule);
     }
