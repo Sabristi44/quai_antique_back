@@ -21,7 +21,14 @@ public class Dish {
     private String image;
     private String title;
     private String description;
-    private double price;
+    private Double price;
     private String category;
+
+    public Dish(String title, String description, Double price, String category) {
+        this.title = title;
+        this.description = description;
+        this.price = price;
+        this.category = category;
+      }
     
 }
