@@ -8,6 +8,7 @@ import java.util.ArrayList;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import lombok.AllArgsConstructor;
@@ -25,7 +26,11 @@ public class Menu {
     private long id;
 
     private String title;
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL,mappedBy = "menu",fetch = FetchType.LAZY)
     private List<Composition> compositions = new ArrayList<>();
+
+    public Menu(String title) {
+        this.title = title;
+      }
 
 }

@@ -18,7 +18,6 @@ public class DishManagerImpl implements DishManager {
     @Override
     public void addDish(DishInfo dishInfo) {
         Dish dish = new Dish(dishInfo.title,dishInfo.description, dishInfo.price, dishInfo.category);
-        System.out.print("repas" + dish);
         dishDAO.save(dish);
     }
 
