@@ -8,5 +8,6 @@ public interface UserManager {
     
     User login(UserInfo userInfo);
     void createUser(UserInfo userInfo);
+    void createUserAdmin(UserInfo userInfo);
     void updateUserAllergies(AllergyInfo allergyInfos);
 }

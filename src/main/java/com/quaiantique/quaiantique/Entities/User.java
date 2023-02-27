@@ -37,4 +37,10 @@ public class User {
         this.numPerson = 1;
       }
 
+      public User(String mail, String password, boolean isAdmin) {
+        this.mail = mail;
+        this.password = password;
+        this.isAdmin = isAdmin;
+      }
+
 }

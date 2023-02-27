@@ -40,6 +40,16 @@ public class UserManagerImpl implements UserManager {
     }
 
     @Override
+    public void createUserAdmin(UserInfo userInfo) {
+        User user = userDAO.login(userInfo.mail); 
+        if(user == null) {
+        String encodePassword = this.passwordEncoder.encode(userInfo.password);
+        User userCreate = new User(userInfo.mail,encodePassword,true);
+        userDAO.save(userCreate);
+        }
+    }
+
+    @Override
     public void updateUserAllergies(AllergyInfo allergyInfo) {
         User user = new User();
        user = userDAO.findById(allergyInfo.id).get();
