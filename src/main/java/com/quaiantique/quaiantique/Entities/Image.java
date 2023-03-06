@@ -1,5 +1,4 @@
 package com.quaiantique.quaiantique.Entities;
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -8,25 +7,24 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+
 @Entity
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Dish {
-    
+public class Image {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String title;
-    private String description;
-    private Double price;
-    private String category;
+    private String type;
+    private byte[] image;
 
-    public Dish(String title, String description, Double price, String category) {
+    public Image(String title, byte[] image, String type) {
         this.title = title;
-        this.description = description;
-        this.price = price;
-        this.category = category;
+        this.image = image;
+        this.type= type;
       }
     
 }
