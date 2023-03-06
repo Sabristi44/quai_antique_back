@@ -1,7 +1,6 @@
 package com.quaiantique.quaiantique.Service;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import com.quaiantique.quaiantique.Entities.User;
@@ -15,17 +14,16 @@ public class UserManagerImpl implements UserManager {
     @Autowired
     private UserDAO userDAO;
 
-    private PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+    BCryptPasswordEncoder bcryptEncoder = new BCryptPasswordEncoder();
 
     @Override
     public User login(UserInfo userInfo) {
         User user = userDAO.login(userInfo.mail);
-        String encodePassword = this.passwordEncoder.encode(user.getPassword());
-        boolean isPasswordEqual =  passwordEncoder.matches(userInfo.password, encodePassword);
-        if(isPasswordEqual) {
+        boolean isPasswordMatched = bcryptEncoder.matches(userInfo.password, user.getPassword());
+        if(isPasswordMatched) {
             return user;
         } else {
-            return user;
+            return null;
         }
     }
 
@@ -33,7 +31,7 @@ public class UserManagerImpl implements UserManager {
     public void createUser(UserInfo userInfo) {
         User user = userDAO.login(userInfo.mail); 
         if(user == null) {
-        String encodePassword = this.passwordEncoder.encode(userInfo.password);
+        String encodePassword = bcryptEncoder.encode(userInfo.password);
         User userCreate = new User(userInfo.mail,encodePassword);
         userDAO.save(userCreate);
         }
@@ -43,7 +41,7 @@ public class UserManagerImpl implements UserManager {
     public void createUserAdmin(UserInfo userInfo) {
         User user = userDAO.login(userInfo.mail); 
         if(user == null) {
-        String encodePassword = this.passwordEncoder.encode(userInfo.password);
+        String encodePassword = bcryptEncoder.encode(userInfo.password);
         User userCreate = new User(userInfo.mail,encodePassword,true);
         userDAO.save(userCreate);
         }
