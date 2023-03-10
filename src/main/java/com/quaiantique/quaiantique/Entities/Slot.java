@@ -7,6 +7,7 @@ import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
+import java.time.DayOfWeek;
 import java.util.ArrayList;
 
 @AllArgsConstructor
@@ -14,6 +15,7 @@ import java.util.ArrayList;
 public class Slot {
     
     private LocalDate day;
+    private DayOfWeek dayOfWeek;
     private List<LocalTime> slots = new ArrayList<LocalTime>();
 
 }

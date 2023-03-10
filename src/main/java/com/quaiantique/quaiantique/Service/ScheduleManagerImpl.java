@@ -3,7 +3,7 @@ package com.quaiantique.quaiantique.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -50,39 +50,41 @@ public class ScheduleManagerImpl implements ScheduleManager {
     @Override
     public List<Slot> getSlot() {
     Schedule schedule = scheduleDAO.findById(1L).get();
-    LocalDateTime today = LocalDateTime.now();
+    LocalDate today = LocalDate.now();
     List<Slot> slots = new ArrayList<Slot>();
-    LocalDateTime currentDay = today;
+    LocalDate currentDay = today;
     for(int i = 0; i<= 7; i++) {
+    if(i != 0) {
     currentDay = currentDay.plusDays(1);
+    }
     DayOfWeek dayOfWeek = currentDay.getDayOfWeek();
     List<LocalTime> timeSlot = new ArrayList<LocalTime>();
     switch(dayOfWeek){
         case MONDAY: 
-           timeSlot = getLocalTimeSlot(schedule.getOpeningMonday(),schedule.getClosingMonday());
+           timeSlot = getLocalTimeSlot(schedule.getOpeningMonday(),schedule.getClosingMonday(),today.equals(currentDay));
             break;
         case TUESDAY: 
-            timeSlot = getLocalTimeSlot(schedule.getOpeningTuesday(),schedule.getClosingTuesday());
+            timeSlot = getLocalTimeSlot(schedule.getOpeningTuesday(),schedule.getClosingTuesday(),today.equals(currentDay));
             break;
         case WEDNESDAY: 
-            timeSlot = getLocalTimeSlot(schedule.getOpeningWednesday(),schedule.getClosingWednesday());
+            timeSlot = getLocalTimeSlot(schedule.getOpeningWednesday(),schedule.getClosingWednesday(),today.equals(currentDay));
             break;
         case THURSDAY: 
-            timeSlot = getLocalTimeSlot(schedule.getOpeningThursday(),schedule.getClosingThursday());
+            timeSlot = getLocalTimeSlot(schedule.getOpeningThursday(),schedule.getClosingThursday(),today.equals(currentDay));
             break;
         case FRIDAY: 
-            timeSlot = getLocalTimeSlot(schedule.getOpeningFriday(),schedule.getClosingFriday());
+            timeSlot = getLocalTimeSlot(schedule.getOpeningFriday(),schedule.getClosingFriday(),today.equals(currentDay));
             break;
         case SATURDAY: 
-            timeSlot = getLocalTimeSlot(schedule.getOpeningSaturday(),schedule.getClosingSaturday());
+            timeSlot = getLocalTimeSlot(schedule.getOpeningSaturday(),schedule.getClosingSaturday(),today.equals(currentDay));
             break;
         case SUNDAY: 
-            timeSlot = getLocalTimeSlot(schedule.getOpeningSunday(),schedule.getClosingSunday());
+            timeSlot = getLocalTimeSlot(schedule.getOpeningSunday(),schedule.getClosingSunday(),today.equals(currentDay));
             break;
         default:
             break;
     }
-    Slot slot = new Slot(currentDay.toLocalDate(),timeSlot);
+    Slot slot = new Slot(currentDay,dayOfWeek,timeSlot);
     slots.add(slot);
     }
     return slots;
@@ -90,14 +92,18 @@ public class ScheduleManagerImpl implements ScheduleManager {
     }
 
 
-    public List<LocalTime> getLocalTimeSlot(LocalTime opening, LocalTime closing) {
+    public List<LocalTime> getLocalTimeSlot(LocalTime opening, LocalTime closing,boolean isToday) {
       LocalTime closingMenuHour = closing.minusHours(1);
       List<LocalTime> slots = new ArrayList<LocalTime>();
-      slots.add(opening);
+      if(opening.isAfter(LocalTime.now()) || !isToday) {
+        slots.add(opening);
+      }
       LocalTime currentLocal = opening;
       while(currentLocal.isBefore(closingMenuHour)) {
         currentLocal = currentLocal.plusMinutes(15);
+        if(currentLocal.isAfter(LocalTime.now()) || !isToday){
         slots.add(currentLocal);
+        }
       }  
       return slots;
     }
