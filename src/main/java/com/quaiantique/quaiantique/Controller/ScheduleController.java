@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import com.quaiantique.quaiantique.Service.ScheduleManager;
 import com.quaiantique.quaiantique.Entities.Schedule;
+import com.quaiantique.quaiantique.Entities.Slot;
+import java.util.List;
 
 
 @RestController
@@ -24,5 +26,10 @@ public class ScheduleController {
     @GetMapping("/schedule")
     public Schedule getSchedule() {
         return manager.getSchedule();
+    }
+
+    @GetMapping("/slot")
+    public List<Slot> getSlot() {
+        return manager.getSlot();
     }
 }
