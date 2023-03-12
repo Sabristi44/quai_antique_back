@@ -9,4 +9,6 @@ public interface UserDAO extends CrudRepository<User, Long> {
     
     @Query("SELECT u FROM User u WHERE u.mail = :mail")
     User login(@Param("mail") String mail);
+
+    User findByMail(String mail);
 }
