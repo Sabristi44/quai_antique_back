@@ -20,4 +20,31 @@ git clone https://github.com/Sabristi44/quai_antique_back.git
 6 - On peut faire des appels Webservices via les controllers et créer un compte admin ou utilisateur
 7 - on lance le projet front et l'interface graphique
 
-La liste dees webservices sont à retrouver dans le dossier controlleurs
+La liste des webservices sont à retrouver dans le dossier controlleurs
+
+
+Ex de création de compte via postman
+
+Créer un compte admin 
+
+Requête POST
+
+http://localhost:8080/signup/admin
+
+Body : {
+    "mail" : "toto@yopmail.com",
+    "password" : "toto"
+}
+
+Créer un compte 
+
+Requête POST
+
+http://localhost:8080/signup
+
+Body : {
+    "mail" : "toto@yopmail.com",
+    "password" : "toto"
+}
+
+
