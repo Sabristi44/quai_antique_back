@@ -21,8 +21,8 @@ public class UserController {
     }
 
     @PostMapping("/signup")
-    public void signUp(@RequestBody UserInfo userInfo) {
-       manager.createUser(userInfo);
+    public User signUp(@RequestBody UserInfo userInfo) {
+       return manager.createUser(userInfo);
     }
 
     @PostMapping("/signup/admin")

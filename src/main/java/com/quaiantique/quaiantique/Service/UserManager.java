@@ -7,7 +7,7 @@ import com.quaiantique.quaiantique.Controller.AllergyInfo;
 public interface UserManager {
     
     User login(UserInfo userInfo);
-    void createUser(UserInfo userInfo);
+    User createUser(UserInfo userInfo);
     void createUserAdmin(UserInfo userInfo);
     void updateUserAllergies(AllergyInfo allergyInfos);
 }

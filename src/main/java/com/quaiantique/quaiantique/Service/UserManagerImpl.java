@@ -28,13 +28,14 @@ public class UserManagerImpl implements UserManager {
     }
 
     @Override
-    public void createUser(UserInfo userInfo) {
+    public User createUser(UserInfo userInfo) {
         User user = userDAO.login(userInfo.mail); 
         if(user == null) {
         String encodePassword = bcryptEncoder.encode(userInfo.password);
         User userCreate = new User(userInfo.mail,encodePassword);
         userDAO.save(userCreate);
         }
+        return userDAO.findByMail(userInfo.mail);
     }
 
     @Override
