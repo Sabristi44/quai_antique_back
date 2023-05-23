@@ -17,7 +17,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Composition {
+public class Composition { 
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
